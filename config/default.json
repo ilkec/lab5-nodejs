@@ -1,0 +1,5 @@
+{
+    "Database": {
+        "conn": "mongodb+srv://messagesnodejs:u4zu1D0btXTPSlJc@cluster0-srpvj.mongodb.net/test?retryWrites=true&w=majority"
+    }
+}
