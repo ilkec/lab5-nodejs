@@ -2,7 +2,24 @@ const Message = require('../../../models/Message');
 
 
 const getMessages = (req, res)=>{
-    Message.find({}, (err, docs) =>{ //zoeken op niets want je moet alle messages eruit krijgen!
+    if(req.query.user){
+        Message.find({user: req.query.user}, (err, docs) =>{ //zoeken op niets want je moet alle messages eruit krijgen!
+            if(!err){
+                res.json({
+                    "status" : "success",
+                    "data": {
+                        "message" : docs
+                    }
+                }); 
+            }
+            if(err){
+                res.json({
+                     "status": "error",
+                     "message": "Could not find any messages"
+                });
+            }
+        })
+    } else{Message.find({}, (err, docs) =>{ //zoeken op niets want je moet alle messages eruit krijgen!
         if(!err){
             res.json({
                 "status" : "success",
@@ -17,7 +34,8 @@ const getMessages = (req, res)=>{
                  "message": "Could not find any messages"
             });
         }
-    })
+    })}
+    
 }
 
 const getMessagesForId = (req, res)=>{
